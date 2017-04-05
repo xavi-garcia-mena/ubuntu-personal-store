@@ -3,8 +3,12 @@ dist: trusty
 
 services: docker
 
+before_install:
+  - if [ $encrypted_527ca8567c65_key ]; then eval "$(ssh-agent)"; ./tests/setup-deploy-key.sh; fi
+
 install:
   - docker build -t ups .
 script:
   - docker run -v ${PWD}:/build ups sh -c 'cd /build && snapcraft'
+  - ./tests/setup-and-run-tests.sh $user $host $port
 
