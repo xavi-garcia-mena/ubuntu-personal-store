@@ -18,6 +18,5 @@ ssh ${SSH_OPTS} "if [ -d $tmp_dir ]; then rm -rf $tmp_dir; fi; mkdir $tmp_dir;"
 cd tests
 ./remote-install-snap.sh $user $host $port $snap $tmp_dir || { echo "Error: unable to deploy snap"; exit 1; }
 scp -P $port ./run_tests.sh  $user@$host:~/$tmp_dir/
-ssh ${SSH_OPTS} "sudo snap list"
 ssh ${SSH_OPTS} "cd ~/$tmp_dir && chmod +x run_tests.sh && ./run_tests.sh"
 
