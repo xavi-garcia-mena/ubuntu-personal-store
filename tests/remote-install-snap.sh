@@ -23,7 +23,6 @@ echo "SSH_OPTS = $SSH_OPTS"
 echo "snap_name = $snap_name"
 echo "snap_pkg_name = $snap_pkg_name"
 
-ssh ${SSH_OPTS} "if [ -d $tmp_dir ]; then rm -rf $tmp_dir; fi; mkdir $tmp_dir;"
 scp -P $port $snap  $user@$host:~/$tmp_dir/
 ssh ${SSH_OPTS} "sudo snap remove $snap_name >/dev/null"
 ssh ${SSH_OPTS} "sudo snap install ~/$tmp_dir/$snap_pkg_name --dangerous --devmode"
